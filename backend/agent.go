@@ -118,7 +118,7 @@ func (a *Agent) GenerateTransformation(ctx context.Context, req *TransformationR
 	}
 
 	// Build prompt using f-string format (no Go template reserved names issue)
-	promptTemplate := getTransformationPrompt(req.Type)
+	promptTemplate := getTransformationPromptWithStyle(req.Type, req.Style)
 
 	prompt := prompts.NewPromptTemplate(
 		promptTemplate,

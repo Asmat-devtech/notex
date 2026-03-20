@@ -145,6 +145,11 @@ class OpenNotebook {
         // Resource Tab Manager
         this.resourceTabManager = new ResourceTabManager(this);
 
+        // Infograph styles
+        this.infographStyles = [];
+        this.selectedInfographStyle = null; // null means default
+        this.infographStylesLoaded = false;
+
         // Note type name mapping
         this.noteTypeNameMap = {
             summary: '摘要',
@@ -193,6 +198,7 @@ class OpenNotebook {
     async init() {
         await this.initAuth();
         await this.loadConfig();
+        await this.loadInfographStyles();
         this.bindEvents();
         this.initResizers();
         this.initNotebookNameEditor();
@@ -272,6 +278,9 @@ class OpenNotebook {
         // Clear public notebook state
         this.currentPublicToken = null;
         this.currentNotebook = null;
+
+        // Reset public notebooks cache to ensure fresh load
+        this._publicNotebooksLoaded = false;
 
         // Reload user's notebooks
         await this.loadNotebooks();
@@ -380,6 +389,119 @@ class OpenNotebook {
 
     applyConfig() {
         // All features enabled by default, no config to apply
+    }
+
+    // Load infograph styles from API
+    async loadInfographStyles() {
+        if (this.infographStylesLoaded) return;
+
+        try {
+            const response = await this.api('/v2/infograph/styles');
+            this.infographStyles = response.styles || [];
+            this.infographStylesLoaded = true;
+            console.log(`[InfographStyles] Loaded ${this.infographStyles.length} styles`);
+        } catch (error) {
+            console.warn('[InfographStyles] Failed to load styles:', error);
+            // Use fallback styles
+            this.infographStyles = [
+                { id: 'craft-handmade', name: '手绘纸艺风格', description: '手绘和纸艺美学，温暖有机的感觉' },
+                { id: 'cyberpunk-neon', name: '赛博朋克霓虹风格', description: '深色背景上的霓虹发光效果，未来主义美学' },
+                { id: 'kawaii', name: '日系可爱风格', description: '日式可爱风格，大眼睛和柔和色调' },
+                { id: 'technical-schematic', name: '工程蓝图风格', description: '工程技术图纸，精确的几何线条' },
+            ];
+            this.infographStylesLoaded = true;
+        }
+    }
+
+    // Toggle infograph style dropdown
+    toggleInfographStyleDropdown() {
+        const dropdown = document.getElementById('infographStyleDropdown');
+        if (!dropdown) return;
+
+        const isVisible = dropdown.style.display !== 'none';
+        if (isVisible) {
+            this.hideInfographStyleDropdown();
+        } else {
+            this.showInfographStyleDropdown();
+        }
+    }
+
+    // Show infograph style dropdown
+    async showInfographStyleDropdown() {
+        const dropdown = document.getElementById('infographStyleDropdown');
+        const list = document.getElementById('infographStyleList');
+
+        if (!dropdown || !list) return;
+
+        // Load styles if not loaded
+        await this.loadInfographStyles();
+
+        // Render styles
+        list.innerHTML = this.infographStyles.map(style => `
+            <div class="style-item ${this.selectedInfographStyle === style.id ? 'selected' : ''}" data-style-id="${style.id}">
+                <div class="style-item-name">
+                    ${this.selectedInfographStyle === style.id ? '<span class="check-icon">✓</span>' : ''}
+                    ${style.name}
+                </div>
+                <div class="style-item-desc">${style.description}</div>
+            </div>
+        `).join('');
+
+        // Add "Default" option at top
+        const defaultItem = document.createElement('div');
+        defaultItem.className = `style-item ${this.selectedInfographStyle === null ? 'selected' : ''}`;
+        defaultItem.dataset.styleId = '';
+        defaultItem.innerHTML = `
+            <div class="style-item-name">
+                ${this.selectedInfographStyle === null ? '<span class="check-icon">✓</span>' : ''}
+                默认风格
+            </div>
+            <div class="style-item-desc">使用系统默认的手绘纸艺风格</div>
+        `;
+        list.prepend(defaultItem);
+
+        // Bind click events
+        list.querySelectorAll('.style-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const styleId = item.dataset.styleId || null;
+                this.selectInfographStyle(styleId);
+            });
+        });
+
+        dropdown.style.display = 'block';
+    }
+
+    // Hide infograph style dropdown
+    hideInfographStyleDropdown() {
+        const dropdown = document.getElementById('infographStyleDropdown');
+        if (dropdown) {
+            dropdown.style.display = 'none';
+        }
+    }
+
+    // Select an infograph style and trigger generation
+    selectInfographStyle(styleId) {
+        this.selectedInfographStyle = styleId || null;
+        this.hideInfographStyleDropdown();
+
+        // Update the style picker button to show selected style
+        const stylePickerBtn = document.querySelector('.style-picker-btn');
+        if (stylePickerBtn) {
+            if (styleId) {
+                const style = this.infographStyles.find(s => s.id === styleId);
+                stylePickerBtn.title = `风格: ${style ? style.name : styleId}`;
+            } else {
+                stylePickerBtn.title = '选择风格';
+            }
+        }
+
+        // Auto-trigger infograph generation
+        if (this.currentNotebook) {
+            const infographCard = document.querySelector('.transform-card[data-type="infograph"]');
+            if (infographCard) {
+                this.handleTransform('infograph', infographCard);
+            }
+        }
     }
 
     initResizers() {
@@ -515,9 +637,35 @@ class OpenNotebook {
 
         document.querySelectorAll('.transform-card').forEach(card => {
             card.addEventListener('click', (e) => {
+                // Check if the click is on the style picker button
+                if (e.target.closest('.style-picker-btn')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.toggleInfographStyleDropdown();
+                    return;
+                }
                 e.preventDefault();
                 this.handleTransform(card.dataset.type, card);
             });
+        });
+
+        // Style dropdown close button
+        const styleDropdownClose = document.querySelector('.style-dropdown-close');
+        if (styleDropdownClose) {
+            styleDropdownClose.addEventListener('click', () => {
+                this.hideInfographStyleDropdown();
+            });
+        }
+
+        // Close style dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('infographStyleDropdown');
+            const stylePickerBtn = document.querySelector('.style-picker-btn');
+            if (dropdown && dropdown.style.display !== 'none') {
+                if (!dropdown.contains(e.target) && !stylePickerBtn?.contains(e.target)) {
+                    this.hideInfographStyleDropdown();
+                }
+            }
         });
 
         safeAddEventListener('btnCustomTransform', 'click', (e) => {
@@ -1273,6 +1421,9 @@ class OpenNotebook {
 
         // 更新分享按钮状态
         this.updateShareButtonState();
+
+        // Exit readonly mode when switching to private notebook
+        this.setReadOnlyMode(false);
 
         this.switchView('workspace');
 
@@ -2896,15 +3047,22 @@ class OpenNotebook {
 
         try {
             const sourceIds = sources.map(s => s.id);
+            const requestBody = {
+                type: type,
+                prompt: customPrompt || undefined,
+                source_ids: sourceIds,
+                length: 'medium',
+                format: 'markdown',
+            };
+
+            // Add style parameter for infograph type
+            if (type === 'infograph' && this.selectedInfographStyle) {
+                requestBody.style = this.selectedInfographStyle;
+            }
+
             const note = await this.api(`/notebooks/${this.currentNotebook.id}/transform`, {
                 method: 'POST',
-                body: JSON.stringify({
-                    type: type,
-                    prompt: customPrompt || undefined,
-                    source_ids: sourceIds,
-                    length: 'medium',
-                    format: 'markdown',
-                }),
+                body: JSON.stringify(requestBody),
             });
 
             // 3. 停止动画并更新占位符

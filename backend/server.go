@@ -270,6 +270,13 @@ func (s *Server) setupRoutes() {
 		public.GET("/notebooks/:token/notes", s.handleListPublicNotes)
 	}
 
+	// API v2 public routes (no authentication required)
+	apiV2Public := s.http.Group("/api/v2")
+	{
+		// List available infographic styles (public, no auth needed)
+		apiV2Public.GET("/infograph/styles", s.handleListInfographStyles)
+	}
+
 	// Serve public notebook page
 	s.http.GET("/public/:token", AuditMiddlewareLite(), func(c *gin.Context) {
 		c.Header("Cache-Control", "no-cache")
@@ -315,6 +322,26 @@ func (s *Server) Start() error {
 	addr := fmt.Sprintf("%s:%s", s.cfg.ServerHost, s.cfg.ServerPort)
 	golog.Infof("server starting on %s", addr)
 	return s.http.Run(addr)
+}
+
+// handleListInfographStyles returns all available infographic styles
+func (s *Server) handleListInfographStyles(c *gin.Context) {
+	styles := ListInfographStyles()
+	// Return only id, name, and description (not the full prompt)
+	type StyleResponse struct {
+		ID          string `json:"id"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+	response := make([]StyleResponse, len(styles))
+	for i, style := range styles {
+		response[i] = StyleResponse{
+			ID:          style.ID,
+			Name:        style.Name,
+			Description: style.Description,
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{"styles": response})
 }
 
 // Health check handler

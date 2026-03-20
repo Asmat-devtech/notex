@@ -2,6 +2,11 @@ package backend
 
 // getTransformationPrompt returns the prompt template for each transformation type
 func getTransformationPrompt(transformType string) string {
+	return getTransformationPromptWithStyle(transformType, "")
+}
+
+// getTransformationPromptWithStyle returns the prompt template with optional style parameter
+func getTransformationPromptWithStyle(transformType string, style string) string {
 	switch transformType {
 	case "summary":
 		return summaryPrompt()
@@ -31,7 +36,7 @@ func getTransformationPrompt(transformType string) string {
 		return mindmapPrompt()
 
 	case "infograph":
-		return infographPrompt()
+		return infographPromptWithStyle(style)
 
 	case "ppt":
 		return pptPrompt()
@@ -209,6 +214,33 @@ func infographPrompt() string {
 请使用nano banana pro根据提供的输入创建插图。
 
 输入内容如下：
+{sources}
+`
+}
+
+func infographPromptWithStyle(styleID string) string {
+	style := GetInfographStyle(styleID)
+	return `Create a professional infographic following these specifications:
+
+## Image Specifications
+- **Type**: Infographic
+- **Layout**: Horizontal layout (16:9 aspect ratio)
+- **Style**: ` + style.Name + `
+
+## Style Guidelines
+` + style.Prompt + `
+
+## Content Requirements
+- Include simple visual elements, icons, or illustrations to enhance visual appeal
+- If content involves sensitive or copyrighted figures, replace with visually similar alternatives
+- Keep information concise, highlight keywords and core concepts
+- Use whitespace effectively to emphasize key points
+- Use the same language as the provided content unless otherwise specified
+
+## Instructions
+Use nano banana pro to create the illustration based on the provided input.
+
+Input content:
 {sources}
 `
 }

@@ -356,7 +356,10 @@
                                     <div class="transform-icon">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 12H3"/><path d="M12 3v18"/><path d="M16 8l-8 8"/><path d="M8 8l8 8"/></svg>
                                     </div>
-                                    <span class="transform-name">信息图</span>
+                                    <div class="transform-name-row">
+                                        <span class="transform-name">信息图</span>
+                                        <span class="style-picker-btn" title="选择风格"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></span>
+                                    </div>
                                 </button>
                                 <button class="transform-card" data-type="ppt">
                                     <div class="transform-icon">
@@ -382,6 +385,16 @@
                                     </div>
                                     <span class="transform-name">数据图表</span>
                                 </button>
+                            </div>
+                            <!-- Infograph Style Picker Dropdown -->
+                            <div id="infographStyleDropdown" class="style-dropdown" style="display: none;">
+                                <div class="style-dropdown-header">
+                                    <span>选择信息图风格</span>
+                                    <button class="style-dropdown-close">&times;</button>
+                                </div>
+                                <div class="style-dropdown-list" id="infographStyleList">
+                                    <!-- Styles will be loaded dynamically -->
+                                </div>
                             </div>
                             <div class="transform-custom-pill">
                                 <input type="text" id="customPrompt" placeholder="自定义生成..." autocomplete="off">

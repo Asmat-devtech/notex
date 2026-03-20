@@ -118,11 +118,12 @@ type Podcast struct {
 
 // TransformationRequest represents a request to generate a note
 type TransformationRequest struct {
-	Type      string   `json:"type"`       // "summary", "faq", "study_guide", "outline", "podcast", "custom"
+	Type      string   `json:"type"`       // "summary", "faq", "study_guide", "outline", "podcast", "custom", "infograph"
 	Prompt    string   `json:"prompt"`     // Custom prompt for "custom" type
 	SourceIDs []string `json:"source_ids"` // Specific sources to use, empty = all
 	Length    string   `json:"length"`     // "short", "medium", "long"
 	Format    string   `json:"format"`     // "markdown", "bullet_points", "paragraphs"
+	Style     string   `json:"style"`      // Style for infographic generation (e.g., "craft-handmade", "claymation")
 }
 
 // TransformationResponse represents the response from a transformation
