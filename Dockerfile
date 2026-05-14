@@ -19,9 +19,10 @@ WORKDIR /app
 
 COPY --from=builder /app/notex .
 COPY --from=builder /app/backend/frontend ./backend/frontend
+COPY entrypoint.sh .
 
-RUN mkdir -p /data
+RUN chmod +x entrypoint.sh && mkdir -p /data
 
 EXPOSE 8080
 
-CMD sh -c "SERVER_PORT=${PORT:-8080} ./notex -server"
+ENTRYPOINT ["./entrypoint.sh"]
