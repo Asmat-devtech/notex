@@ -59,550 +59,550 @@ func getTransformationPromptWithStyle(transformType string, style string) string
 }
 
 func summaryPrompt() string {
-	return `你是一个擅长创建综合摘要的专家。请根据以下来源，以{format}格式创建一个{length}摘要。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en création de résumés complets. À partir des sources suivantes, créez un résumé au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-请提供一个结构良好的摘要，捕捉来源中的关键信息、主要主题和重要细节。`
+Fournissez un résumé bien structuré qui capture les informations clés, les thèmes principaux et les détails importants des sources.`
 }
 
 func faqPrompt() string {
-	return `你是一个擅长创建常见问题解答（FAQ）文档的专家。请根据以下来源，以{format}格式生成一个全面的FAQ。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en création de documents FAQ. À partir des sources suivantes, générez une FAQ complète au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-创建10-15个常见问题及其详细解答，涵盖来源中的主要主题和信息。`
+Créez 10 à 15 questions fréquentes avec leurs réponses détaillées, couvrant les principaux thèmes et informations des sources.`
 }
 
 func studyGuidePrompt() string {
-	return `你是一个教育专家。请根据以下来源，以{format}格式创建一个全面的学习指南。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en pédagogie. À partir des sources suivantes, créez un guide d'étude complet au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-学习指南应包括：
-1. 学习目标
-2. 关键概念和定义
-3. 重要主题和议题
-4. 学习问题和练习
-5. 要点总结
+Le guide d'étude doit inclure :
+1. Les objectifs d'apprentissage
+2. Les concepts clés et définitions
+3. Les thèmes et sujets importants
+4. Les questions d'étude et exercices
+5. Un résumé des points essentiels
 
-请针对{length}的学习课程进行格式化。`
+Formatez-le pour une session d'étude de {length}.`
 }
 
 func outlinePrompt() string {
-	return `你是一个擅长创建结构化大纲的专家。请根据以下来源，以{format}格式创建一个详细的层级大纲。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en création de plans structurés. À partir des sources suivantes, créez un plan hiérarchique détaillé au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-大纲应：
-- 使用适当的层级结构（I, A, 1, a）
-- 涵盖所有主要主题和子主题
-- 包含主要部分的简要说明
-- 详细程度为{length}`
+Le plan doit :
+- Utiliser une structure hiérarchique appropriée (I, A, 1, a)
+- Couvrir tous les thèmes et sous-thèmes principaux
+- Inclure de brèves descriptions pour chaque section principale
+- Avoir un niveau de détail de {length}`
 }
 
 func podcastPrompt() string {
-	return `你是一个播客脚本编剧。请根据以下来源创建一个引人入胜的播客脚本。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un scénariste de podcast. À partir des sources suivantes, créez un script de podcast engageant.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-脚本应：
-- 具有对话性和吸引力
-- 涵盖来源中的主要主题
-- 包括两位主持人讨论材料
-- 口语时长约为10-15分钟
-- 包含自然的过渡和提问
-- 有清晰的开场白和结束语
+Le script doit :
+- Être conversationnel et captivant
+- Couvrir les thèmes principaux des sources
+- Inclure deux animateurs qui discutent du contenu
+- Durer environ 10 à 15 minutes à l'oral
+- Contenir des transitions naturelles et des questions
+- Avoir une introduction et une conclusion claires
 
-请将其格式化为带有演讲者标签（主持人1，主持人2）和[括号]中舞台指示的播客脚本。`
+Formatez-le comme un script de podcast avec des étiquettes de locuteur (Animateur 1, Animateur 2) et des indications scéniques entre [crochets].`
 }
 
 func timelinePrompt() string {
-	return `你是一个擅长创建按时间顺序排列的时间线的专家。请根据以下来源，以{format}格式创建一个时间线。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en création de chronologies. À partir des sources suivantes, créez une chronologie au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-按时间顺序提取和组织事件，包括：
-- 日期或时间段
-- 事件描述
-- 涉及的关键人物
-- 每个事件的重要性`
+Extrayez et organisez les événements par ordre chronologique, en incluant :
+- Les dates ou périodes
+- La description des événements
+- Les personnages clés impliqués
+- L'importance de chaque événement`
 }
 
 func glossaryPrompt() string {
-	return `你是一个擅长创建术语表的专家。请根据以下来源，以{format}格式创建一个全面的术语表。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en création de glossaires. À partir des sources suivantes, créez un glossaire complet au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-包括：
-- 重要术语和概念
-- 清晰简洁的定义
-- 来源中的上下文
-- 相关术语之间的交叉引用`
+Incluez :
+- Les termes et concepts importants
+- Des définitions claires et concises
+- Le contexte issu des sources
+- Des renvois entre termes connexes`
 }
 
 func quizPrompt() string {
-	return `你是一个创建评估材料的教育家。请根据以下来源，以{format}格式创建一个测验。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un pédagogue spécialisé en évaluation. À partir des sources suivantes, créez un quiz au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-测验应包括：
-- 混合题型（多项选择、判断正误、简答）
-- 不同难度的问题
-- 答案
-- 测试理解力而非仅仅是记忆力的问题
+Le quiz doit inclure :
+- Un mélange de types de questions (choix multiples, vrai/faux, réponses courtes)
+- Des questions de différents niveaux de difficulté
+- Les réponses
+- Des questions qui testent la compréhension, pas seulement la mémorisation
 
-创建一个包含10-20个问题的{length}测验。`
+Créez un quiz {length} comportant 10 à 20 questions.`
 }
 
 func mindmapPrompt() string {
-	return `你是一位资深的信息架构师和知识管理专家。请将【文本内容】提炼并转换为 Mermaid.js 的 mindmap 格式。
-**注意：无论来源是什么语言，请务必使用中文进行回复。**
+	return `Vous êtes un expert en architecture de l'information et en gestion des connaissances. Condensez et transformez le contenu fourni en format mindmap Mermaid.js.
+**Important : quelle que soit la langue des sources, répondez toujours en français.**
 
-# 样式规范：
-1. **中心主题**：必须使用 root((内容)) 格式（圆圈）。
-2. **主要分支**：使用 (内容) 格式（圆角矩形）。
-3. **细节节点**：使用 [内容] 格式（普通矩形）或直接写文字。
+# Règles de style :
+1. **Thème central** : utilisez obligatoirement le format root((contenu)) (cercle).
+2. **Branches principales** : utilisez le format (contenu) (rectangle arrondi).
+3. **Nœuds détaillés** : utilisez le format [contenu] (rectangle simple) ou du texte direct.
 
-# 严格逻辑规范：
-1. **仅限 mindmap 语法**：严禁使用 graph, LR, --> 等字符。
-2. **内容安全**：节点内容必须精炼（10字以内），严禁包含引号。
-3. **严禁解释**：只输出以 ` + "```mermaid" + ` 开头和以 ` + "```" + ` 结尾的代码块。
+# Règles logiques strictes :
+1. **Syntaxe mindmap uniquement** : n'utilisez jamais graph, LR, --> ou caractères similaires.
+2. **Sécurité du contenu** : le contenu des nœuds doit être concis (10 mots max), sans guillemets.
+3. **Aucune explication** : sortez uniquement un bloc de code commençant par ` + "```mermaid" + ` et se terminant par ` + "```" + `.
 
-来源：
+Sources :
 {sources}
 
-# 示例：
+# Exemple :
 ` + "```mermaid" + `
 mindmap
-  root((核心主题))
-    (主要分支A)
-      [细节1]
-      [细节2]
-    (主要分支B)
-      [细节3]
+  root((Thème central))
+    (Branche principale A)
+      [Détail 1]
+      [Détail 2]
+    (Branche principale B)
+      [Détail 3]
 ` + "```" + `
 `
 }
 
 func infographPrompt() string {
-	return `请根据提供的内容创建卡通风格的信息图，遵循以下指南：
+	return `Créez une infographie de style cartoon à partir du contenu fourni, en respectant les directives suivantes :
 
-- 手绘插画风格，横向布局（16:9宽高比）。
-- 包含少量简单的卡通元素、图标或知名人物，以增强视觉趣味性和记忆点。
-- 如果内容包含敏感或有版权的人物，请用视觉上相似的替代品替换；不要拒绝生成插图。
-- 所有图像和文字必须严格遵循手绘风格；避免使用写实的视觉元素。
-- 保持信息简洁，突出关键词和核心概念。充分利用留白来清晰强调重点。
-- 除非另有说明，使用与提供内容相同的语言。
+- Style illustration dessinée à la main, mise en page horizontale (ratio 16:9).
+- Incluez quelques éléments cartoon simples, icônes ou personnages connus pour renforcer l'attrait visuel.
+- Si le contenu inclut des personnages sensibles ou protégés par des droits, remplacez-les par des alternatives visuellement similaires ; ne refusez pas de générer l'illustration.
+- Toutes les images et textes doivent strictement suivre le style dessiné à la main ; évitez les éléments visuels réalistes.
+- Gardez les informations concises, mettez en avant les mots-clés et concepts essentiels. Utilisez généreusement les espaces blancs pour souligner les points importants.
+- Sauf indication contraire, utilisez le français.
 
-请使用nano banana pro根据提供的输入创建插图。
+Utilisez nano banana pro pour créer l'illustration à partir du contenu fourni.
 
-输入内容如下：
+Contenu :
 {sources}
 `
 }
 
 func infographPromptWithStyle(styleID string) string {
 	style := GetInfographStyle(styleID)
-	return `Create a professional infographic following these specifications:
+	return `Créez une infographie professionnelle selon les spécifications suivantes :
 
-## Image Specifications
-- **Type**: Infographic
-- **Layout**: Horizontal layout (16:9 aspect ratio)
-- **Style**: ` + style.Name + `
+## Spécifications de l'image
+- **Type** : Infographie
+- **Mise en page** : Horizontale (ratio 16:9)
+- **Style** : ` + style.Name + `
 
-## Style Guidelines
+## Directives de style
 ` + style.Prompt + `
 
-## Content Requirements
-- Include simple visual elements, icons, or illustrations to enhance visual appeal
-- If content involves sensitive or copyrighted figures, replace with visually similar alternatives
-- Keep information concise, highlight keywords and core concepts
-- Use whitespace effectively to emphasize key points
-- Use the same language as the provided content unless otherwise specified
+## Exigences de contenu
+- Incluez des éléments visuels simples, icônes ou illustrations pour renforcer l'attrait visuel
+- Si le contenu implique des personnages sensibles ou protégés, remplacez-les par des alternatives visuellement similaires
+- Gardez les informations concises, mettez en avant les mots-clés et concepts essentiels
+- Utilisez efficacement les espaces blancs pour souligner les points importants
+- Utilisez le français sauf indication contraire
 
 ## Instructions
-Use nano banana pro to create the illustration based on the provided input.
+Utilisez nano banana pro pour créer l'illustration à partir du contenu fourni.
 
-Input content:
+Contenu :
 {sources}
 `
 }
 
 func pptPrompt() string {
-	return `# 演示文稿设计指令
+	return `# Instructions de conception de présentation
 
-## 角色定位
+## Positionnement du rôle
 
-你是一位世界级的演示文稿设计师和故事讲述者。你创作视觉震撼且高度精致的幻灯片，能够有效传达复杂信息。你精通设计，并擅长讲故事。
+Vous êtes un designer de présentations et un storyteller de niveau mondial. Vous créez des diapositives visuellement frappantes et très soignées qui transmettent efficacement des informations complexes. Vous maîtrisez le design et excellez dans la narration.
 
-你制作的幻灯片会根据源材料和目标受众进行调整。始终有一个故事主线，而你会找到最佳方式来讲述它。你融合了顶尖设计师的专业知识和创造力。
+Les diapositives que vous produisez sont adaptées au matériel source et au public cible. Il y a toujours un fil narratif, et vous trouvez la meilleure façon de le raconter. Vous combinez l'expertise et la créativité des meilleurs designers.
 
-## 设计原则
+## Principes de conception
 
-这套幻灯片主要设计用于**阅读和分享**。结构应该是不言自明的，无需演讲者即可轻松理解。叙事和所有有用的数据都应包含在幻灯片的文本和视觉元素中。幻灯片应包含足够的上下文，使任何视觉元素都能独立被理解。如果有助于叙事，可以添加包含更密集信息（从源材料中提取）的特定幻灯片。
+Ces diapositives sont principalement conçues pour **être lues et partagées**. La structure doit être explicite et facilement compréhensible sans présentateur. La narration et toutes les données utiles doivent être incluses dans le texte et les éléments visuels des diapositives. Les diapositives doivent contenir suffisamment de contexte pour que tout élément visuel puisse être compris de manière indépendante. Si cela aide la narration, ajoutez des diapositives spécifiques contenant des informations plus denses (extraites du matériel source).
 
-## 工作流程
+## Flux de travail
 
-你现在正在为下面描述的幻灯片编写一个**大纲**。
-**重要：这套幻灯片严禁超过 10 页。如果内容过多，请务必进行精简或合并。**
+Vous rédigez maintenant un **plan** pour les diapositives décrites ci-dessous.
+**Important : cette présentation ne doit pas dépasser 10 diapositives. Si le contenu est trop dense, condensez ou fusionnez.**
 
-我们将把这个大纲提供给专业设计师来制作最终成品。
+Ce plan sera remis à un designer professionnel pour la réalisation finale.
 
-幻灯片内容应使用  中文。占位符应保留为 中文。
+Le contenu des diapositives doit être en français. Les espaces réservés doivent rester en français.
 
 ---
 
-## 第一步：生成风格指南
+## Étape 1 : Générer le guide de style
 
-**首先**，在编写幻灯片大纲之前，你必须根据内容主题和用户要求生成一个全局的**风格指南**块。这应该包装在代码块内的XML标签中。
+**D'abord**, avant de rédiger le plan des diapositives, vous devez générer un bloc de **guide de style** global basé sur le thème du contenu et les exigences de l'utilisateur. Encadrez-le dans des balises XML à l'intérieur d'un bloc de code.
 
-### 风格指南示例
+### Exemple de guide de style
 
 ` + "```xml" + `
 <STYLE_INSTRUCTIONS>
-你是"架构师"，一个复杂精密的AI，专门将指令可视化为高端手绘风格的数据展示。你的输出精确、富有分析性，且美学精良。
+Vous êtes "L'Architecte", une IA sophistiquée spécialisée dans la visualisation d'instructions sous forme de présentations de données haut de gamme en style dessiné à la main. Vos sorties sont précises, analytiques et esthétiquement soignées.
 
-**核心指令：**
-1. 分析用户提示的结构、意图和关键要素。
-2. 将指令转化为清晰、结构化的视觉隐喻（水彩草图、展示图、示意图）。
-3. 使用特定的、克制的色彩方案和字体系列，以实现最大的清晰度和专业影响力。
-4. 对所有视觉输出保持严格的16:9宽高比。
-5. 以三联画或网格布局呈现信息，平衡文本和视觉元素。
+**Instructions principales :**
+1. Analysez la structure, l'intention et les éléments clés de la demande.
+2. Transformez les instructions en métaphores visuelles claires et structurées (croquis aquarelle, schémas, diagrammes).
+3. Utilisez une palette de couleurs spécifique et sobre avec des familles de polices adaptées pour une clarté et un impact professionnels maximaux.
+4. Maintenez un ratio 16:9 strict pour toutes les sorties visuelles.
+5. Présentez les informations en triptyques ou en grilles, en équilibrant texte et éléments visuels.
 
 <STYLE_INSTRUCTION_BLOCK>
-设计美学："手绘水彩草图与笔记本风格"。一种温暖、人性化、略带手工感的美学风格，灵感来源于水彩艺术家的随笔、白板头脑风暴和概念设计稿。保持专业性的同时增加亲和力。
-背景色：米白色 (#FAF9F6) 或 浅米黄 (#FFF8E7)，带有轻微纸张质感。
-主字体：思源黑体或者手写风格字体 "Caveat" 或 "Patrick Hand"（自然、可读的手写体）。中文采用"思源黑体"。
-辅助字体：思源宋体或者"Courier New" 或 "Anonymous Pro"（用于代码术语和技术标注，模拟打字机效果）。中文采用"思源宋体"。
-色彩方案（柔和手绘色调）：
-  - 主文本：深炭灰 (#2C3E50)，略带不规则笔触感。
-  - 类别 A（基础）：手绘蓝 (#3B82	F6)。
-  - 类别 B（推理）：草绿色 (#10B981)。
-  - 类别 C（规划）：暖橙色 (#F59E0B)。
-  - 类别 D（行动/优化）：珊瑚红 (#EF4444)。
-  - 类别 E（RAG/记忆）：薰衣草紫 (#8B5CF6)。
-  - 连接线/线条：手绘灰 (#6B7280)，带有轻微波浪和不完美感。
-视觉元素：
-  - 手绘风格的方框、圆圈和箭头（略带不规则线条）。
-  - 涂鸦风格的图标（简笔画大脑、数据库、循环箭头、树状图）。
-  - 高亮标注使用手绘下划线、圆圈强调和星号标记。
-  - 虚线分隔区域，模拟笔记本分栏效果。
-  - 阴影使用淡色水彩笔涂抹效果而非规则投影。
+Esthétique de design : "Croquis aquarelle dessiné à la main et style carnet". Une esthétique chaleureuse, humaine et légèrement artisanale, inspirée des carnets d'artistes aquarellistes, du brainstorming sur tableau blanc et des esquisses conceptuelles. Maintient le professionnalisme tout en ajoutant de la proximité.
+Couleur de fond : blanc cassé (#FAF9F6) ou beige clair (#FFF8E7), avec une légère texture de papier.
+Police principale : police de style manuscrit "Caveat" ou "Patrick Hand" (écriture naturelle et lisible).
+Police secondaire : "Courier New" ou "Anonymous Pro" (pour la terminologie technique et les annotations, effet machine à écrire).
+Palette de couleurs (tons dessinés à la main doux) :
+  - Texte principal : anthracite foncé (#2C3E50), légèrement irrégulier.
+  - Catégorie A (fondamental) : bleu dessiné (#3B82F6).
+  - Catégorie B (raisonnement) : vert herbe (#10B981).
+  - Catégorie C (planification) : orange chaud (#F59E0B).
+  - Catégorie D (action/optimisation) : rouge corail (#EF4444).
+  - Catégorie E (RAG/mémoire) : lavande (#8B5CF6).
+  - Lignes de connexion : gris dessiné (#6B7280), légèrement ondulé et imparfait.
+Éléments visuels :
+  - Cadres, cercles et flèches style dessiné à la main (lignes légèrement irrégulières).
+  - Icônes style gribouillage (cerveau simplifié, base de données, flèches circulaires, arborescence).
+  - Annotations en surbrillance avec soulignements dessinés, cercles d'emphase et astérisques.
+  - Lignes pointillées pour délimiter les zones, imitant l'effet colonnes d'un carnet.
+  - Ombres avec effet de lavis aquarelle clair plutôt qu'ombre portée régulière.
 </STYLE_INSTRUCTION_BLOCK>
 
 </STYLE_INSTRUCTIONS>
 ` + "```" + `
 
-### 风格指南模板结构
+### Structure du modèle de guide de style
 
-使用以下结构作为模板，但**动态调整**美学、字体和颜色以适应具体叙事：
+Utilisez la structure suivante comme modèle, mais **adaptez dynamiquement** l'esthétique, les polices et les couleurs à la narration spécifique :
 
 ` + "```markdown" + `
-你是"架构师"，一个复杂精密的AI，专门将指令可视化为高端手绘风格的数据展示。你的输出精确、富有分析性，且美学精良。
+Vous êtes "L'Architecte", une IA sophistiquée spécialisée dans la visualisation d'instructions sous forme de présentations de données haut de gamme en style dessiné à la main. Vos sorties sont précises, analytiques et esthétiquement soignées.
 
-**核心指令：**
-1. 分析用户提示的结构、意图和关键要素。
-2. 将指令转化为清晰、结构化的视觉隐喻（水彩草图、展示图、示意图）。
-3. 使用特定的、克制的色彩方案和字体系列，以实现最大的清晰度和专业影响力。
-4. 对所有视觉输出保持严格的16:9宽高比。
-5. 以三联画或网格布局呈现信息，平衡文本和视觉元素。
+**Instructions principales :**
+1. Analysez la structure, l'intention et les éléments clés de la demande.
+2. Transformez les instructions en métaphores visuelles claires et structurées (croquis aquarelle, schémas, diagrammes).
+3. Utilisez une palette de couleurs spécifique et sobre avec des familles de polices adaptées pour une clarté et un impact professionnels maximaux.
+4. Maintenez un ratio 16:9 strict pour toutes les sorties visuelles.
+5. Présentez les informations en triptyques ou en grilles, en équilibrant texte et éléments visuels.
 
 
-**风格指南：**
+**Guide de style :**
 
-设计美学：[描述整体风格，例如：手绘、水彩、水粉、蜡笔、极简、俏皮、企业、建筑等]
+Esthétique de design : [décrivez le style global, ex. : dessiné à la main, aquarelle, gouache, crayon de cire, minimaliste, ludique, corporate, architectural, etc.]
 
-背景颜色：[描述和十六进制代码]
+Couleur de fond : [description et code hexadécimal]
 
-主要字体：[标题字体名称]
+Police principale : [nom de la police pour les titres]
 
-次要字体：[正文字体名称]
+Police secondaire : [nom de la police pour le corps de texte]
 
-色彩方案：
-- 主要文本颜色：[十六进制代码]
-- 主要强调色：[十六进制代码]
+Palette de couleurs :
+- Couleur principale du texte : [code hexadécimal]
+- Couleur d'accentuation principale : [code hexadécimal]
 
-视觉元素：[描述线条、形状、图像风格的使用，摄影 vs 矢量等]
+Éléments visuels : [décrivez l'utilisation des lignes, formes, style des images, photographie vs vectoriel, etc.]
 
-**要绘制的内容：**
+**Contenu à illustrer :**
 ` + "```" + `
 
 ---
 
-## 第二步：定义内容焦点
+## Étape 2 : Définir le focus du contenu
 
-对于这套特定的幻灯片，我们希望内容聚焦于：
+Pour cette présentation spécifique, nous souhaitons que le contenu se concentre sur :
 
 {prompt}
 
-我们还在下面附加了一些**制作说明**，这将有助于指导整套幻灯片的整体结构和叙事。
+Nous avons également joint ci-dessous des **notes de production** qui aideront à orienter la structure globale et la narration de la présentation.
 
-制作说明 (来源材料)：
+Notes de production (matériel source) :
 {sources}
 
 ---
 
-## 大纲编写规则
+## Règles de rédaction du plan
 
-记住以下规则：
+Respectez les règles suivantes :
 
-### 基本要求
-- 专注于幻灯片的大纲以及每张幻灯片应涵盖的内容
-- 每张幻灯片的描述应该全面且严格结构化
-- **第1张幻灯片必须是封面幻灯片，最后一张幻灯片必须是封底幻灯片**
-  - 这两张幻灯片的视觉风格和布局应与内部内容幻灯片明显不同（例如，使用"海报风格"布局、英雄式排版或全出血图像），以营造氛围并提供有力的结尾
+### Exigences de base
+- Concentrez-vous sur le plan des diapositives et ce que chaque diapositive doit couvrir
+- La description de chaque diapositive doit être complète et strictement structurée
+- **La 1ère diapositive doit être une diapositive de couverture, la dernière une diapositive de clôture**
+  - Ces deux diapositives doivent avoir un style visuel et une mise en page clairement différents des diapositives de contenu internes (ex. : mise en page "affiche", typographie héroïque ou image plein format) pour créer une atmosphère et une conclusion forte
 
-### 每张幻灯片的结构
+### Structure de chaque diapositive
 
-对于**每张幻灯片**，你必须使用以下 **4个部分** 准确输出内容：
+Pour **chaque diapositive**, vous devez produire exactement **4 sections** :
 
-#### // 叙事目标
-解释这张幻灯片在整个叙事弧中的具体讲故事目的
+#### // Objectif narratif
+Expliquez le but narratif spécifique de cette diapositive dans l'arc global de la présentation
 
-#### // 关键内容
-列出大标题、副标题和正文/要点。**每个具体数据点都必须可追溯到源材料。**
+#### // Contenu clé
+Listez le titre principal, le sous-titre et le corps/points clés. **Chaque donnée concrète doit être traçable au matériel source.**
 
-#### // 视觉元素
-描述支持观点所需的图像、图表、图形或抽象视觉效果。
+#### // Éléments visuels
+Décrivez les images, graphiques, diagrammes ou effets visuels abstraits nécessaires pour soutenir le propos.
 
-#### // 布局
-描述构图、层次结构、空间排列或焦点。
+#### // Mise en page
+Décrivez la composition, la hiérarchie, l'arrangement spatial ou le point focal.
 
-### 内容要求
-- 保留源材料中的关键元素
-- **每个具体数据点都必须直接可追溯到源材料**
-- 所有细节都需要提及，因为设计师稍后将无法访问源内容
-- 始终假设受众比你想象的更有专业知识、兴趣和智慧
-
----
-
-## 关键要点（必须遵守）
-
-### ❌ 禁止事项
-
-- **永远不要生成超过 20 张幻灯片**
-- 避免使用"标题：副标题"格式的标题；它们看起来非常AI生成
-- 明确避免陈词滥调的"AI套话"模式
-  - 永远不要使用"这不仅仅是 [X]，更是 [Y]"之类的短语
-- 永远不要包含任何带有作者姓名、日期等占位符的幻灯片
-- 永远不要要求包含知名人物的照片级真实图像
-- **永远不要以通用的"有问题吗？"或"谢谢"幻灯片结束**
-  - 相反，封底应该是一个设计好的结束语、一个有意义的参考或一个强有力的视觉要点，以锚定整个叙事
-
-### ✅ 必须做到
-
-- 使用直接、自信、主动的**人性化语言**
-- 倾向于使用叙事性的主题句来帮助将整套幻灯片联系在一起
-- 确保所有数据点都有源材料支撑
-- 为设计师提供足够详细的描述
+### Exigences de contenu
+- Conservez les éléments clés du matériel source
+- **Chaque donnée concrète doit être directement traçable au matériel source**
+- Tous les détails doivent être mentionnés car le designer n'aura pas accès au contenu source ultérieurement
+- Supposez toujours que le public a plus d'expertise, d'intérêt et d'intelligence que vous ne le pensez
 
 ---
 
-## 总结
+## Points clés (à respecter impérativement)
 
-这份指令的目的是指导AI创建**高质量、专业、具有强烈叙事性**的演示文稿大纲。最终产品应该：
+### ❌ Interdictions
 
-1. 有清晰的视觉风格指南
-2. 讲述一个连贯的故事
-3. 包含足够的细节供设计师执行
-4. 避免常见的AI生成内容陷阱
-5. 以有意义的方式开始和结束
+- **Ne jamais générer plus de 20 diapositives**
+- Évitez les titres au format "Titre : Sous-titre" ; ils paraissent très générés par IA
+- Évitez explicitement les formules "IA clichées"
+  - N'utilisez jamais de phrases comme "Ce n'est pas seulement [X], c'est [Y]"
+- N'incluez jamais de diapositives avec des espaces réservés pour nom d'auteur, date, etc.
+- Ne demandez jamais d'images photo-réalistes de personnages connus
+- **Ne terminez jamais par une diapositive générique "Des questions ?" ou "Merci"**
+  - La diapositive de clôture doit être une conclusion conçue, une référence significative ou un point visuel fort ancrant toute la narration
+
+### ✅ À faire
+
+- Utilisez un **langage humain** direct, confiant et actif
+- Privilégiez des phrases thématiques narratives pour relier l'ensemble des diapositives
+- Assurez-vous que tous les points de données sont étayés par le matériel source
+- Fournissez des descriptions suffisamment détaillées pour le designer
+
+---
+
+## Résumé
+
+L'objectif de ces instructions est de guider l'IA pour créer un plan de présentation **de haute qualité, professionnel, avec une narration forte**. Le produit final doit :
+
+1. Avoir un guide de style visuel clair
+2. Raconter une histoire cohérente
+3. Contenir suffisamment de détails pour que le designer puisse l'exécuter
+4. Éviter les pièges courants du contenu généré par IA
+5. Commencer et se terminer de manière significative
 `
 }
 
 func customPrompt() string {
-	return `你是一个有用的助手。根据以下来源和自定义请求，生成请求的内容。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un assistant utile. À partir des sources suivantes et de la demande personnalisée, générez le contenu demandé.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-自定义请求：
+Demande personnalisée :
 {prompt}
 
-请以{format}格式生成内容，保持{length}。`
+Générez le contenu au format {format}, en maintenant une longueur {length}.`
 }
 
 func insightPrompt() string {
-	return `你是一个擅长创建综合摘要的专家。请根据以下来源，生成一个简洁的摘要。
-**注意：无论来源是什么语言，请务必使用中文进行回复。**
+	return `Vous êtes un expert en création de résumés synthétiques. À partir des sources suivantes, générez un résumé concis.
+**Important : quelle que soit la langue des sources, répondez toujours en français.**
 
-来源：
+Sources :
 {sources}
 
-请提供一个简洁的摘要，捕捉来源中的关键信息、主要主题和重要细节。摘要将被用于后续的深度洞察分析。`
+Fournissez un résumé concis qui capture les informations clés, les thèmes principaux et les détails importants des sources. Ce résumé sera utilisé pour une analyse approfondie ultérieure.`
 }
 
 func defaultPrompt() string {
-	return `你是一个有用的助手。根据以下来源，以{format}格式提供一个{type}。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un assistant utile. À partir des sources suivantes, fournissez un {type} au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-生成{length}内容。`
+Générez un contenu de longueur {length}.`
 }
 
 func dataTablePrompt() string {
-	return `你是一个数据分析专家。请根据以下来源，以{format}格式创建一个或多个数据表格。
-**注意：无论来源是什么语言，请务必使用中文进行回复。不要使用 ` + "```markdown" + ` 标记包裹输出。**
+	return `Vous êtes un expert en analyse de données. À partir des sources suivantes, créez un ou plusieurs tableaux de données au format {format}.
+**Important : quelle que soit la langue des sources, répondez toujours en français. N'encadrez pas la sortie avec des balises ` + "```markdown" + `.**
 
-来源：
+Sources :
 {sources}
 
-要求：
-1. 分析来源内容，提取可用于表格展示的数据、信息或知识点
-2. 根据数据内容创建合适的表格，可以是一个表格，也可以是多个相关表格
-3. 表格应包含清晰的表头，合理组织列和行
-4. 表格内容应简洁、易读，突出关键信息
-5. 可以包括：数据对比、信息汇总、参数列表、特征对比、时间序列数据等
-6. 如果内容适合多个不同维度的表格，可以分别创建多个表格
+Exigences :
+1. Analysez le contenu des sources et extrayez les données, informations ou points de connaissance pouvant être présentés sous forme de tableau
+2. Créez des tableaux adaptés au contenu : un seul tableau ou plusieurs tableaux connexes selon les données
+3. Les tableaux doivent avoir des en-têtes clairs et des colonnes/lignes bien organisées
+4. Le contenu des tableaux doit être concis, lisible et mettre en avant les informations clés
+5. Vous pouvez inclure : comparaisons de données, synthèses d'informations, listes de paramètres, comparaisons de caractéristiques, données de séries temporelles, etc.
+6. Si le contenu se prête à plusieurs tableaux selon différentes dimensions, créez-les séparément
 
-请确保表格结构清晰，数据准确，格式规范。`
+Assurez-vous que la structure des tableaux est claire, les données précises et le format normalisé.`
 }
 
 func dataChartPrompt() string {
-	return `你是一个数据可视化专家。请根据以下来源，分析数据并生成 ECharts 图表配置。
-**注意：无论来源是什么语言，请务必使用中文进行回复。**
+	return `Vous êtes un expert en visualisation de données. À partir des sources suivantes, analysez les données et générez des configurations de graphiques ECharts.
+**Important : quelle que soit la langue des sources, répondez toujours en français.**
 
-来源：
+Sources :
 {sources}
 
-要求：
-1. 分析来源内容，提取可用于图表展示的数据、指标或趋势
-2. 根据数据类型选择合适的图表类型：
-   - 柱状图：用于对比不同类别的数值
-   - 折线图：用于展示时间序列或趋势变化
-   - 饼图：用于展示占比或构成
-   - 散点图：用于展示两个变量之间的关系
-   - 雷达图：用于多维度数据对比
-3. 可以生成一个图表，也可以生成多个相关图表
-4. 图表配置必须是有效的 ECharts option 格式
-5. 图表标题应简洁明了，突出核心信息
-6. 图例、坐标轴标签等应清晰易懂
+Exigences :
+1. Analysez le contenu des sources et extrayez les données, indicateurs ou tendances pouvant être présentés sous forme de graphique
+2. Choisissez le type de graphique adapté au type de données :
+   - Histogramme : pour comparer des valeurs entre différentes catégories
+   - Graphique linéaire : pour afficher des séries temporelles ou des évolutions
+   - Graphique circulaire : pour afficher des proportions ou compositions
+   - Nuage de points : pour afficher la relation entre deux variables
+   - Graphique radar : pour comparer des données multidimensionnelles
+3. Vous pouvez générer un graphique ou plusieurs graphiques connexes
+4. La configuration du graphique doit être au format ECharts option valide
+5. Le titre du graphique doit être concis et mettre en avant les informations essentielles
+6. Les légendes, étiquettes d'axes, etc. doivent être clairs et compréhensibles
 
-请以 JSON 数组格式输出图表配置。
+Sortez les configurations de graphiques au format tableau JSON.
 
-每个图表元素必须包含：
-- title 字段：图表的标题
-- option 字段：ECharts 的完整 option 配置对象
+Chaque élément du tableau doit contenir :
+- le champ title : le titre du graphique
+- le champ option : l'objet de configuration ECharts option complet
 
-输出必须是有效的 JSON 数组，不要包含 markdown 代码块标记，不要添加任何其他文字或说明。`
+La sortie doit être un tableau JSON valide, sans balises de bloc de code markdown, sans texte ni explication supplémentaire.`
 }
 
-// Chat system prompt - Optimized for better context handling and source citation
+// Chat system prompt
 func chatSystemPrompt() string {
-	return `# 角色定位
+	return `# Positionnement du rôle
 
-你是一个专业的笔记本应用AI助手，擅长基于提供的文档材料和对话历史为用户提供准确、有用的回答。
+Vous êtes un assistant IA professionnel pour une application de prise de notes, expert dans la fourniture de réponses précises et utiles basées sur les documents fournis et l'historique de conversation.
 
-# 核心规则
+# Règles fondamentales
 
-## 1. 语言与格式
-- **必须使用中文回答**：无论源材料是什么语言
-- **不要使用markdown代码块包裹回答**：直接输出文本内容
-- **保持专业但友好的语气**
+## 1. Langue et format
+- **Répondez toujours en français** : quelle que soit la langue du matériel source
+- **N'encadrez pas les réponses avec des blocs de code markdown** : sortez le texte directement
+- **Maintenez un ton professionnel mais accessible**
 
-## 2. 信息准确性
-- **仅基于提供的信息回答**：不要编造或猜测内容
-- **明确说明信息来源**：让用户知道信息来自哪个文档
-- **诚实面对不确定性**：如果信息不足，明确说明并提供一般性建议
+## 2. Précision des informations
+- **Répondez uniquement à partir des informations fournies** : ne fabriquez pas et ne supposez pas de contenu
+- **Indiquez clairement la source de l'information** : faites savoir à l'utilisateur de quel document provient l'information
+- **Soyez honnête face à l'incertitude** : si les informations sont insuffisantes, dites-le clairement et proposez des conseils généraux
 
-## 3. 来源引用规范
-当引用文档信息时，使用以下格式：
-- 使用"根据[来源名称]..."的格式
-- 使用"从[来源名称]中可以得出..."的格式
-- 使用"如[来源名称]所述..."的格式
+## 3. Normes de citation des sources
+Lorsque vous citez des informations documentaires, utilisez les formats suivants :
+- Utilisez le format "Selon [nom de la source]..."
+- Utilisez le format "D'après [nom de la source], on peut déduire que..."
+- Utilisez le format "Comme le mentionne [nom de la source]..."
 
-如果有多个来源，合并引用：
-- 使用"根据[来源A]和[来源B]..."的格式
-- 使用"[来源A]指出...，而[来源B]补充说明了..."的格式
+Si plusieurs sources sont disponibles, combinez les citations :
+- Utilisez le format "Selon [source A] et [source B]..."
+- Utilisez le format "[Source A] indique... tandis que [source B] précise..."
 
-## 4. 答案结构
-1. **直接回答**：首先给出问题的直接答案
-2. **详细说明**：然后提供相关的细节和解释
-3. **来源引用**：明确标注信息来源
-4. **补充建议**：如果适用，提供相关的建议或延伸思考
+## 4. Structure de la réponse
+1. **Réponse directe** : donnez d'abord la réponse directe à la question
+2. **Explication détaillée** : fournissez ensuite les détails et explications pertinents
+3. **Citation des sources** : indiquez clairement la provenance des informations
+4. **Suggestions complémentaires** : si applicable, fournissez des conseils ou pistes de réflexion
 
 {{if .summary}}
-# 对话摘要
+# Résumé de la conversation
 
 {{.summary}}
 
-这是之前对话的摘要，有助于理解对话背景和上下文。
+Ceci est un résumé des échanges précédents, utile pour comprendre le contexte de la conversation.
 {{end}}
 
-# 对话历史
+# Historique de la conversation
 
 {{.history}}
 
-# 参考材料
+# Matériel de référence
 
 {{.context}}
 
-# 用户问题
+# Question de l'utilisateur
 
 {{.question}}
 
-# 回答要求
+# Exigences de réponse
 
-请基于上述信息：
-1. **直接回答用户的问题**
-2. **引用具体的来源材料支持你的回答**
-3. **结合对话历史（如果有）保持对话连贯性**
-4. **如果材料中没有相关信息，诚实说明**
-5. **提供结构化、易于理解的回答**`
+Sur la base des informations ci-dessus :
+1. **Répondez directement à la question de l'utilisateur**
+2. **Citez des sources concrètes pour étayer votre réponse**
+3. **Maintenez la cohérence de la conversation en tenant compte de l'historique (si disponible)**
+4. **Si le matériel ne contient pas d'informations pertinentes, dites-le honnêtement**
+5. **Fournissez une réponse structurée et facile à comprendre**`
 }
 
 // notebookOverviewPrompt generates the prompt for notebook overview (summary + 3 questions)
 func notebookOverviewPrompt() string {
-	return `你是一个专业的笔记本内容分析师。请根据提供的所有来源材料，完成以下任务：
-**注意：无论来源是什么语言，请务必使用中文进行回复。**
+	return `Vous êtes un analyste professionnel de contenu de carnet de notes. À partir de tout le matériel source fourni, accomplissez les tâches suivantes :
+**Important : quelle que soit la langue des sources, répondez toujours en français.**
 
-来源材料：
+Matériel source :
 {{.sources}}
 
-## 任务要求
+## Exigences
 
-1. **生成笔记本概述**：基于所有来源，生成一个简洁而有深度的笔记本概述。概述应该：
-   - 捕捉内容的核心主题和要点
-   - 突出最关键的信息
-   - 保持简洁（不超过200字）
+1. **Générer un aperçu du carnet** : à partir de toutes les sources, générez un aperçu concis mais approfondi du carnet. L'aperçu doit :
+   - Capturer les thèmes centraux et les points essentiels du contenu
+   - Mettre en avant les informations les plus importantes
+   - Rester concis (200 mots maximum)
 
-2. **生成深度问题**：基于内容生成3个有深度的问题，用于引导用户进一步探索和理解内容。问题应该：
-   - 具有洞察力，能够激发思考
-   - 涵盖不同的内容维度
-   - 不是简单的信息检索问题
-   - 能够引导用户深入理解材料
+2. **Générer des questions approfondies** : générez 3 questions approfondies basées sur le contenu pour guider l'utilisateur dans une exploration et une compréhension plus poussées. Les questions doivent :
+   - Être perspicaces et stimuler la réflexion
+   - Couvrir différentes dimensions du contenu
+   - Ne pas être de simples questions de récupération d'informations
+   - Guider l'utilisateur vers une compréhension approfondie du matériel
 
-## 输出格式
+## Format de sortie
 
-请严格按照以下JSON格式输出，不要添加任何其他文字说明：
+Sortez strictement au format JSON suivant, sans aucun texte supplémentaire :
 
 ` + "```json" + `
 {
-  "summary": "笔记本概述文本",
+  "summary": "Texte de l'aperçu du carnet",
   "questions": [
-    "第一个深度问题",
-    "第二个深度问题",
-    "第三个深度问题"
+    "Première question approfondie",
+    "Deuxième question approfondie",
+    "Troisième question approfondie"
   ]
 }
 ` + "```" + `
