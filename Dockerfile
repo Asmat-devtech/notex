@@ -21,8 +21,8 @@ COPY --from=builder /app/notex .
 COPY --from=builder /app/backend/frontend ./backend/frontend
 COPY entrypoint.sh .
 
-RUN chmod +x entrypoint.sh && mkdir -p /data
+RUN chmod +x entrypoint.sh notex && mkdir -p /data
 
 EXPOSE 8080
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "./entrypoint.sh"]
