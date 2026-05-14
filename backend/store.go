@@ -84,11 +84,6 @@ func (s *Store) initSchema() error {
 		return err
 	}
 
-	// Migration: Add status tracking columns to sources table
-	if err := s.migrateSourceStatusColumns(); err != nil {
-		return err
-	}
-
 	// Migration: Add hash_id column to users table for existing databases
 	if err := s.migrateAddHashIDColumn(); err != nil {
 		return err
@@ -217,8 +212,12 @@ func (s *Store) initSchema() error {
 	CREATE INDEX IF NOT EXISTS idx_activity_logs_created ON activity_logs(created_at);
 	`
 
-	_, err = s.db.Exec(restSchema)
-	return err
+	if _, err = s.db.Exec(restSchema); err != nil {
+		return err
+	}
+
+	// Migration: Add status tracking columns to sources table (after table creation)
+	return s.migrateSourceStatusColumns()
 }
 
 // migrateSourceStatusColumns adds status tracking columns to sources table
