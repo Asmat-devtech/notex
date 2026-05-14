@@ -3,9 +3,7 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "./notex -server"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
-
 healthcheckPath = "/api/health"
-healthcheckTimeout = 30
+healthcheckTimeout = 300
