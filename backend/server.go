@@ -152,13 +152,14 @@ func (s *Server) setupRoutes() {
 	golog.Info("Registering /api/files/:filename route")
 	s.http.GET("/api/files/:filename", AuditMiddlewareLite(), OptionalAuthMiddleware(s.cfg.JWTSecret), s.handleServeFile)
 
+	// Health check — exempt from auth (Railway healthcheck)
+	s.http.GET("/api/health", s.handleHealth)
+
 	// API routes
 	api := s.http.Group("/api")
 	api.Use(AuditMiddlewareLite())
 	api.Use(AuthMiddleware(s.cfg.JWTSecret)) // Apply JWT Auth
 	{
-		// Health check
-		api.GET("/health", s.handleHealth)
 		api.GET("/config", s.handleConfig)
 
 		// Auth API (get current user)
